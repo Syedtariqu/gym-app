@@ -1,30 +1,84 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+// import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+// import React,{useState} from 'react';
 
-export default function App() {
+// export default function Bott() {
+//   const [name , setName] = useState('');
+//   return (
+//     <View style={styles.container}>
+//       <TextInput
+//       placeholder="Enter your name "
+//       onChangeText={(text)=> setName(text)}
+//       value={name}
+//        />
+//        <Button
+//         title="Click Me"
+//        />
+//        <Text style={styles.text}>My name is {name}</Text>
+//     </View>
+//   );
+// }
+// const styles = StyleSheet.create({
+//   container:{
+//     flex:1,
+//     justifyContent:'center',
+//     alignItems:'center',
+//   },
+//   text:{
+//     color:'#fff',
+//   },
+// });
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+
+const Bott = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (text) => {
+    setInputValue(text);
+  };
+
+  const handleButtonPress = () => {
+    // eslint-disable-next-line no-alert
+    alert(`Input Value: ${inputValue}`);
+  };
+
   return (
-    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
-    <Text style={styles.buttonText}>
-      Sign in with Facebook
-    </Text>
-  </LinearGradient>
+    <View style={styles.container}>
+      <Text style={styles.label}>Enter something:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Type here"
+        value={inputValue}
+        onChangeText={handleInputChange}
+      />
+      <Button title="Submit" onPress={handleButtonPress} />
+      <Text style={styles.output}>Current Value: {inputValue}</Text>
+    </View>
   );
-}
+};
 
-var styles = StyleSheet.create({
-    linearGradient: {
-      flex: 1,
-      paddingLeft: 15,
-      paddingRight: 15,
-      borderRadius: 5,
-    },
-    buttonText: {
-      fontSize: 18,
-      fontFamily: 'Gill Sans',
-      textAlign: 'center',
-      margin: 10,
-      color: '#ffffff',
-      backgroundColor: 'transparent',
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  label: {
+    marginBottom: 10,
+    fontSize: 18,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  output: {
+    marginTop: 20,
+    fontSize: 18,
+  },
+});
+
+export default Bott;
+

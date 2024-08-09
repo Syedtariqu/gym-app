@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomToggle from '../Custom/CustomToggle';
+
 const Login = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
 
@@ -99,42 +100,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderBottomColor: '#000',
     marginBottom: 20,
     fontSize: 16,
     paddingVertical: 5,
+    color: '#000', // Set the text color to black
   },
   toggleWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 30,
-  },
-  toggleContainer: {
-    width: 40,
-    height: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    padding: 2,
-  },
-  toggleEnabled: {
-    backgroundColor: '#000',
-  },
-  toggleDisabled: {
-    backgroundColor: '#aaa',
-  },
-  toggleCircle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#fff',
-  },
-  circleEnabled: {
-    alignSelf: 'flex-end',
-  },
-  circleDisabled: {
-    alignSelf: 'flex-start',
   },
   forgotPassword: {
     color: '#d5801c',
