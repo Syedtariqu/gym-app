@@ -10,15 +10,15 @@ import ExerciseTrackingScreen from './component/pages/ExerciseTrackingScreen.jsx
 
 function App() {
   return (
-      //  <WelcomeSlider/>
-    //  <Login/>
-    //  <ForgotPassword/>
-    //  <Bott/>
-    //  <Profile/>
+    // <WelcomeSlider/>
+    <Login/>
+    // <ForgotPassword/>
+    // <Bott/>
+    // <Profile/>
 
     // <CreateNewPassword/>
     // <OtpVerification/>
-    <ExerciseTrackingScreen/>
+    // <ExerciseTrackingScreen/>
   );
 }
 
