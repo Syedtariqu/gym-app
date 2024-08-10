@@ -11,8 +11,8 @@ import ExerciseTrackingScreen from './component/pages/ExerciseTrackingScreen.jsx
 function App() {
   return (
     // <WelcomeSlider/>
-    <Login/>
-    // <ForgotPassword/>
+    // <Login/>
+    <ForgotPassword/>
     // <Bott/>
     // <Profile/>
 
