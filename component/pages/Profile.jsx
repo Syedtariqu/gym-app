@@ -12,7 +12,6 @@ const Profile = () => {
 
   const handlePress = (name) => {
     console.log(`${name} pressed`);
-    // Handle the press action for the specific icon
   };
 
   return (
@@ -118,7 +117,6 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: 'center',
-    // paddingBottom: 20,
   },
   profile: {
     color: '#333',
