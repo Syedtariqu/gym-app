@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: 'center',
-    // paddingBottom: 20,
   },
   profile: {
     color: '#333',
