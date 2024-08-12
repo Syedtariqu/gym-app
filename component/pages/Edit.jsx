@@ -1,12 +1,53 @@
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native';
-import React from 'react';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Feather';
 import Icons from 'react-native-vector-icons/Entypo';
 import LinearGradient from 'react-native-linear-gradient';
+import ToastNotification from '../Custom/ToastNotification';
+
 export default function Edit() {
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [toast, setToast] = useState({ visible: false, message: '', type: '' });
+
+    const handleSave = () => {
+        // Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!fullName) {
+            setToast({ visible: true, message: 'Please enter your full name', type: 'error' });
+            return;
+        }
+
+        if (!email) {
+            setToast({ visible: true, message: 'Please enter your email address', type: 'error' });
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            setToast({ visible: true, message: 'Please enter a valid email address', type: 'error' });
+            return;
+        }
+
+        // Proceed with saving data
+        setToast({ visible: true, message: 'Profile updated successfully', type: 'success' });
+    };
+
+    useEffect(() => {
+        let timer;
+        if (toast.visible) {
+            // Set a timer to hide the toast after 3 seconds
+            timer = setTimeout(() => {
+                setToast(prevToast => ({ ...prevToast, visible: false }));
+            }, 3000);
+        }
+        // Cleanup the timer if the component unmounts or the toast visibility changes
+        return () => clearTimeout(timer);
+    }, [toast.visible]);
+
     return (
         <View style={styles.container}>
+            {toast.visible && <ToastNotification message={toast.message} type={toast.type} visible={toast.visible} />}
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <View style={styles.edithead}>
                     <Icon name="chevron-left" size={24} color="#000" />
@@ -19,7 +60,7 @@ export default function Edit() {
                         style={styles.profileImage}
                         resizeMode={'cover'}
                     />
-                    <TouchableOpacity style={styles.cameraButton} >
+                    <TouchableOpacity style={styles.cameraButton}>
                         <Text style={styles.cameraText}>Edit Photo</Text>
                         <Icons name="camera" size={24} color="#000" />
                     </TouchableOpacity>
@@ -30,14 +71,19 @@ export default function Edit() {
                         style={styles.input}
                         placeholder="Enter your Full Name"
                         placeholderTextColor="#aaa"
+                        value={fullName}
+                        onChangeText={setFullName}
                     />
                     <Text style={styles.label}>Email ID</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="Enter your Email Id"
                         placeholderTextColor="#aaa"
+                        keyboardType="email-address"
+                        value={email}
+                        onChangeText={setEmail}
                     />
-                    <View >
+                    <View>
                         <TouchableOpacity style={styles.toggleWrapper}>
                             <Text style={styles.forgotPassword}>Change Password</Text>
                             <Icon name="chevron-right" size={24} color="#d5801c" />
@@ -45,7 +91,7 @@ export default function Edit() {
                     </View>
                 </View>
                 <View style={styles.loginContainer}>
-                    <TouchableOpacity style={styles.loginButton}>
+                    <TouchableOpacity style={styles.loginButton} onPress={handleSave}>
                         <LinearGradient
                             colors={['#d5801c', '#a65a12']}
                             start={{ x: 0.5, y: 0 }}
@@ -60,17 +106,18 @@ export default function Edit() {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F8F8F8',
     },
     scrollViewContent: {
-        // paddingBottom: 10, // Default padding, will be overwritten dynamically
+        paddingBottom: 10, // Adjust padding if necessary
     },
     profileContainer: {
         alignItems: 'center',
-        // paddingBottom: 20,
+        paddingBottom: 20,
     },
     edithead: {
         flexDirection: 'row',
@@ -98,8 +145,6 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         backgroundColor: '#CCC',
         borderRadius: 20,
-        width: 'auto',
-        height: 'auto',
     },
     cameraText: {
         color: '#000',
@@ -122,7 +167,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontSize: 16,
         paddingVertical: 5,
-        color: '#000', // Set the text color to black
+        color: '#000',
     },
     forgotPassword: {
         color: '#d5801c',
@@ -139,23 +184,23 @@ const styles = StyleSheet.create({
         width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      gradient: {
+    },
+    gradient: {
         width: '100%',
         paddingVertical: 10,
         paddingHorizontal: 40,
         borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      loginButtonText: {
+    },
+    loginButtonText: {
         color: '#fff',
         fontSize: 18,
         fontWeight: 'bold',
-      },
-      loginContainer: {
+    },
+    loginContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 90,
-      },
+    },
 });
