@@ -7,6 +7,8 @@ import Bott from './component/pages/Bott.jsx';
 import CreateNewPassword from './component/pages/CreateNewPassword.jsx';
 import OtpVerification from './component/pages/OtpVerification.jsx';
 import ExerciseTrackingScreen from './component/pages/ExerciseTrackingScreen.jsx';
+import Dashboard from './component/pages/Dashboard.jsx';
+import DietScreen from './component/pages/DietScreen.jsx';
 import Edit from './component/pages/Edit.jsx';
 
 function App() {
@@ -16,10 +18,12 @@ function App() {
     // <ForgotPassword/>
     // <Bott/>
     // <Profile/>
-    <Edit/>
+    // <Edit/>
     // <CreateNewPassword/>
     // <OtpVerification/>
     // <ExerciseTrackingScreen/>
+    // <Dashboard/>
+    <DietScreen/>
   );
 }
 
