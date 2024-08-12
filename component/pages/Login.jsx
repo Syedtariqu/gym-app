@@ -1,15 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomToggle from '../Custom/CustomToggle';
+import ToastNotification from '../Custom/ToastNotification';
 
 const Login = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [memberId, setMemberId] = useState('');
+  const [password, setPassword] = useState('');
+  const [toast, setToast] = useState({ visible: false, message: '', type: '' });
+
+  useEffect(() => {
+    let timer;
+    if (toast.visible) {
+      // Set a timer to hide the toast after 3 seconds
+      timer = setTimeout(() => {
+        setToast(prevToast => ({ ...prevToast, visible: false }));
+      }, 3000);
+    }
+    // Cleanup the timer if the component unmounts or the toast visibility changes
+    return () => clearTimeout(timer);
+  }, [toast.visible]);
 
   const toggleSwitch = () => setPasswordVisible(previousState => !previousState);
 
+  const handleLogin = () => {
+    if (!memberId) {
+      setToast({ visible: true, message: 'Please enter your Member ID', type: 'error' });
+      return;
+    }
+  
+    if (!password) {
+      setToast({ visible: true, message: 'Please enter your password', type: 'error' });
+      return;
+    }
+  
+    if (password.length !== 6) {
+      setToast({ visible: true, message: 'Password must be exactly 6 digits long', type: 'error' });
+      return;
+    }
+  
+    // Proceed with the login process
+    setToast({ visible: true, message: 'Login successful', type: 'success' });
+  };
+
   return (
     <View style={styles.container}>
+      {toast.visible && <ToastNotification message={toast.message} type={toast.type} visible={toast.visible} />}
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <Image
           source={require('../../assets/image/gym-4.jpg')}
@@ -25,6 +62,8 @@ const Login = () => {
             style={styles.input}
             placeholder="Enter your ID"
             placeholderTextColor="#aaa"
+            value={memberId}
+            onChangeText={setMemberId}
           />
           <Text style={styles.label}>Password</Text>
           <TextInput
@@ -32,6 +71,9 @@ const Login = () => {
             placeholder="Enter your 6 digit password"
             placeholderTextColor="#aaa"
             secureTextEntry={!isPasswordVisible}
+            value={password}
+            onChangeText={setPassword}
+            maxLength={6}
           />
           <View style={styles.toggleWrapper}>
             <CustomToggle isEnabled={isPasswordVisible} toggleSwitch={toggleSwitch} />
@@ -40,7 +82,7 @@ const Login = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.loginContainer}>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
               <LinearGradient
                 colors={['#d5801c', '#a65a12']}
                 start={{ x: 0.5, y: 0 }}
@@ -105,7 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 16,
     paddingVertical: 5,
-    color: '#000', // Set the text color to black
+    color: '#000',
   },
   toggleWrapper: {
     flexDirection: 'row',

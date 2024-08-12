@@ -1,12 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import ToastNotification from '../Custom/ToastNotification';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [toast, setToast] = useState({ visible: false, message: '', type: '' });
+
+  const handleSendOtp = () => {
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setToast({ visible: true, message: 'Please enter your email address', type: 'error' });
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setToast({ visible: true, message: 'Please enter a valid email address', type: 'error' });
+      return;
+    }
+
+    // Proceed with sending OTP
+    setToast({ visible: true, message: 'OTP sent successfully', type: 'success' });
+  };
+
+  useEffect(() => {
+    let timer;
+    if (toast.visible) {
+      // Set a timer to hide the toast after 3 seconds
+      timer = setTimeout(() => {
+        setToast(prevToast => ({ ...prevToast, visible: false }));
+      }, 3000);
+    }
+    // Cleanup the timer if the component unmounts or the toast visibility changes
+    return () => clearTimeout(timer);
+  }, [toast.visible]);
 
   return (
     <View style={styles.container}>
+      {toast.visible && <ToastNotification message={toast.message} type={toast.type} visible={toast.visible} />}
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <Image
           source={require('../../assets/image/gym-5.jpg')}
@@ -31,7 +63,7 @@ const ForgotPassword = () => {
             <Text style={styles.tryAnotherWayText}>Try another way</Text>
           </TouchableOpacity>
           <View style={styles.loginContainer}>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={handleSendOtp}>
               <LinearGradient
                 colors={['#d5801c', '#a65a12']}
                 start={{ x: 0.5, y: 0 }}
@@ -67,7 +99,6 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     paddingHorizontal: 30,
-    // marginBottom:80,
     marginBottom: 70,
   },
   label: {
@@ -81,10 +112,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#000',
     fontSize: 16,
     paddingVertical: 5,
-    color: '#000', // Set the text color to black
+    color: '#000',
   },
-
-
   loginButton: {
     borderRadius: 25,
     overflow: 'hidden',
@@ -109,11 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    // marginBottom:90,
   },
-
-
-  // form here
   textContainer: {
     marginVertical: 20,
     paddingHorizontal: 10,
@@ -137,7 +162,6 @@ const styles = StyleSheet.create({
     color: '#000',
     marginLeft: 9,
   },
-
   tryAnotherWay: {
     marginTop: 50,
     alignItems: 'center',

@@ -7,15 +7,16 @@ import Bott from './component/pages/Bott.jsx';
 import CreateNewPassword from './component/pages/CreateNewPassword.jsx';
 import OtpVerification from './component/pages/OtpVerification.jsx';
 import ExerciseTrackingScreen from './component/pages/ExerciseTrackingScreen.jsx';
+import Edit from './component/pages/Edit.jsx';
 
 function App() {
   return (
     // <WelcomeSlider/>
     // <Login/>
-    <ForgotPassword/>
+    // <ForgotPassword/>
     // <Bott/>
     // <Profile/>
-
+    <Edit/>
     // <CreateNewPassword/>
     // <OtpVerification/>
     // <ExerciseTrackingScreen/>
