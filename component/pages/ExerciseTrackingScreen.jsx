@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 15,
+    color: '#555',
     // fontWeight: 'bold',
     textAlign: 'center',
     fontFamily: 'Poppins-SemiBold'
