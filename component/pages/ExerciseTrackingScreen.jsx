@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: 'gray',
-    fontFamily: 'Poppins-Regular'
+    fontFamily: 'Poppins-Regular',
   },
   activeTabText: {
     color: 'white',
