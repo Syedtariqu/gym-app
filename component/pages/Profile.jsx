@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+=======
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+>>>>>>> 46917b19430be211c4a3f080f996779e3d2ecaa7
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -16,7 +20,11 @@ const Profile = () => {
 
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+=======
       <ScrollView contentContainerStyle={[styles.scrollViewContent, { paddingBottom: scrollViewContentPaddingBottom }]}>
+>>>>>>> 46917b19430be211c4a3f080f996779e3d2ecaa7
         <View style={styles.profileContainer}>
           <Text style={styles.profile}>Profile</Text>
           <Image
@@ -113,10 +121,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8',
   },
   scrollViewContent: {
+<<<<<<< HEAD
+    paddingBottom: 60, // Ensure there's space for the footer
+  },
+  profileContainer: {
+    alignItems: 'center',
+    paddingBottom: 20,
+=======
     // paddingBottom: 10, // Default padding, will be overwritten dynamically
   },
   profileContainer: {
     alignItems: 'center',
+    // paddingBottom: 20,
   },
   profile: {
     color: '#333',
